@@ -24,7 +24,7 @@ UI/MainUI.lua
 UI/MainUI_functions.lua
 
 main.lua
-settingsNew.lua
+settings.lua
 spellUtils.lua
 sync.lua
 slashcmd.lua
