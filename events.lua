@@ -58,8 +58,9 @@ function handlers.PLAYER_LOGIN()
 			_addon:PrintDebug("Can already join channel");
 			_addon:JoinSyncChannel();
 		else
-			_addon:PrintDebug("Can't join now, registering event");
-			frame:RegisterEvent("CHANNEL_UI_UPDATE");
+            _addon:PrintDebug("Can't join now, registering event");
+            frame:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
+            frame:RegisterEvent("CHANNEL_UI_UPDATE");  
 		end
 	end
 	
@@ -88,8 +89,21 @@ end
 
 -- CHANNEL_UI_UPDATE
 function handlers.CHANNEL_UI_UPDATE()
+    _addon:PrintDebug("CHANNEL_UI_UPDATE");
 	frame:UnregisterEvent("CHANNEL_UI_UPDATE");
-	_addon:JoinSyncChannel();
+	_addon:JoinSyncChannel(true);
+end
+
+-- CHAT_MSG_CHANNEL_NOTICE
+function handlers.CHAT_MSG_CHANNEL_NOTICE(joinLeave, a2, a3, channelName, a5, a6, channelType, channelNumber)
+    _addon:PrintDebug("CHAT_MSG_CHANNEL_NOTICE");
+    _addon:PrintDebug(joinLeave .. " " .. channelName);
+    if _addon.syncChannelId == channelNumber then
+        _addon:PrintDebug("Sync channel ready");
+        _addon:SyncRequestFullList("CHANNEL");
+	    _addon:SyncSendFullList("CHANNEL");
+        frame:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE");
+    end
 end
 
 -- PLAYER_REGEN_ENABLED

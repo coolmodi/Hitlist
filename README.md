@@ -23,6 +23,4 @@ Target notification and nearby hostiles list:
 ![Nearby list](images/listnb.png)
 
 ### Note
-This was developed against the BfA API, bearly tested in Classic stress test. It seems to work fine on the surface, but especially the sync feature has a high chance of being a broken mess, or maybe it actually works, no testing about that was done yet :D
-
 *Blizzard removed spell IDs from combat log as of the pre-launch event, so level prediction can't use ranks now, minimal possible level is shown.

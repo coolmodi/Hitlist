@@ -176,6 +176,9 @@ handlers[OP_MULTIPART_UPDATE] = function(msg, author)
 			recvBuffer[author].partCount = maxpart;
 		end
 	else
+		if recvBuffer[author] == nil then
+			return;
+		end
 		recvBuffer[author].msg = recvBuffer[author].msg .. msg:sub(5);
 		recvBuffer[author].recievedCount = recvBuffer[author].recievedCount + 1;
 	end

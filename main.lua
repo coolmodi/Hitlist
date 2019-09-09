@@ -7,7 +7,7 @@ local lastTrigger = 0;
 local lastTriggerName = {};
 
 --- Join channel for data sync
-function _addon:JoinSyncChannel()
+function _addon:JoinSyncChannel(dontSend)
 	if Hitlist_settings.channelName == nil or Hitlist_settings.channelName:len() == 0 then
 		self:PrintError(L["ERROR_SYNC_CHANNEL_NAME"]);
 		return;
@@ -28,8 +28,11 @@ function _addon:JoinSyncChannel()
 	self.syncChannelName = name;
 	
 	self:PrintSuccess(L["SYNC_CHANNEL_JOINED"]);
-	_addon:SyncRequestFullList("CHANNEL");
-	_addon:SyncSendFullList("CHANNEL");
+
+	if not dontSend then
+		_addon:SyncRequestFullList("CHANNEL");
+		_addon:SyncSendFullList("CHANNEL");
+	end
 end
 
 --- Add new target to the list
