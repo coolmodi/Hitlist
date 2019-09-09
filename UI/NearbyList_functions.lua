@@ -254,7 +254,7 @@ function _addon.NearbyList_AddEnemy(name, class, level)
             changed = true;
         end
 
-        if class ~= trackedData[trackedNames[name]].c then
+        if class ~= trackedData[trackedNames[name]].c and class ~= "UNKNOWN" then
             trackedData[trackedNames[name]].c = class;
             changed = true;
         end
